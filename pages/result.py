@@ -8,8 +8,8 @@ from selenium.webdriver.common.by import By
 class WikipediaResultPage:
 
     # Locators
-    PAGE_HEADER = (By.CSS_SELECTOR, 'mw-page-title-main')
-    SEARCH_INPUT = (By.ID, 'search_form_input')
+    PAGE_HEADER = (By.ID, 'firstHeading')
+    BODY_CONTENT = (By.ID, 'bodyContent')
 
     # Initializer
     def __init__(self, browser):
@@ -17,10 +17,23 @@ class WikipediaResultPage:
 
     # Interaction Methods
 
-    def page_header_value(self):
+    def header_value(self):
         page_header = self.browser.find_element(*self.PAGE_HEADER)
-        value = page_header.get_attribute('value')
+        value = page_header.find_element(By.TAG_NAME, 'span').get_attribute("textContent")
         return value
+
+    def body_content(self):
+        return self.browser.find_element(*self.BODY_CONTENT)
+
+    def first_paragraph(self):
+        page_body = self.browser.find_element(*self.BODY_CONTENT)
+        paragraph = page_body.find_element(By.CSS_SELECTOR, '.mw-parser-output > p')
+        return paragraph.text.strip()
 
     def title(self):
         return self.browser.title
+
+    def url(self):
+        url = self.browser.current_url
+        parts = url.rstrip("/").split("/")
+        return "/" + "/".join(parts[-2:])
