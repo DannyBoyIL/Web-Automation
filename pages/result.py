@@ -25,11 +25,6 @@ class WikipediaResultPage:
     def body_content(self):
         return self.browser.find_element(*self.BODY_CONTENT)
 
-    def first_paragraph(self):
-        page_body = self.browser.find_element(*self.BODY_CONTENT)
-        paragraph = page_body.find_element(By.CSS_SELECTOR, '.mw-parser-output > p')
-        return paragraph.text.strip()
-
     def title(self):
         return self.browser.title
 
