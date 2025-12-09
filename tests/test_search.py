@@ -7,7 +7,7 @@ import pytest
 from pages.result import WikipediaResultPage
 from pages.search import WikipediaSearchPage
 
-@pytest.mark.parametrize('phrase', ['python', 'polar bear'])#, 'panda'])
+@pytest.mark.parametrize('phrase', ['python', 'polar bear', 'panda'])
 def test_basic_wikipedia_search(browser, phrase):
     search_page = WikipediaSearchPage(browser)
     result_page = WikipediaResultPage(browser)
@@ -15,7 +15,7 @@ def test_basic_wikipedia_search(browser, phrase):
     # Given the Wikipedia home page is displayed
     search_page.load()
 
-    # When the user searches for "panda"
+    # When the user searches for "{phrase}"
     search_page.search(phrase)
 
     # Then the search result page body header contains "python"

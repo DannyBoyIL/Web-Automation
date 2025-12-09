@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "49e6f1193600b1ff1346d5e192446af6f794ae113060c41d0941118a9593e586"
+            "sha256": "7cd9ded306a7714b418ae5cf83ae001f703a30bcfed1a7c8dc9e918bd14ad251"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -16,6 +16,22 @@
         ]
     },
     "default": {
+        "allure-pytest": {
+            "hashes": [
+                "sha256:6330b09df4dfec04296f1512ddb0be92e1a4741c36ba84e0388b96d327ac5f55",
+                "sha256:9b472baa93b2860cad0eb03fced4091e6a75c6d822a1ec5b92fec5a403c84e10"
+            ],
+            "index": "pypi",
+            "version": "==2.15.2"
+        },
+        "allure-python-commons": {
+            "hashes": [
+                "sha256:19ef4a48bc6d30db484ce95dba74b639fcf87084746aac39d265ab3a1cc70e89",
+                "sha256:d5dd1b56d978d1a1e3f8dd4efd15037add1c457cfb6d0445695dffde6f196446"
+            ],
+            "markers": "python_version >= '3.6'",
+            "version": "==2.15.2"
+        },
         "attrs": {
             "hashes": [
                 "sha256:16d5969b87f0859ef33a48b35d55ac1be6e42ae49d5e853b597db70c35c57e11",
