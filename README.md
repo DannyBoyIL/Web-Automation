@@ -6,13 +6,13 @@ This automation project for web application repository contains example code for
 ## Repository Purpose
 This project serves as a comprehensive example of a modern web automation framework built around simple Wikipedia search‑result page capabilities. It demonstrates a full end-to-end implementation of best practices used in professional QA automation, including:
 
-* Page Object Model (POM) for clean, maintainable test architecture.
-* Behaviour-Driven Development (BDD) using readable, business-oriented scenarios.
-* CI/CD integration for automated test execution in pipelines.
-* Dockerized test environments for consistent and reproducible runs.
-* Allure Reporting for rich, visual test reports.
-* Extensive logging to support debugging and traceability.
-* Failure-proofing techniques to increase test stability and reduce flakiness.
+__* Page Object Model (POM)__ for clean, maintainable test architecture.
+__* Behaviour-Driven Development (BDD)__ using readable, business-oriented scenarios.
+__* CI/CD integration__ for automated test execution in pipelines.
+__* Dockerized test environments__ for consistent and reproducible runs.
+__* Allure Reporting__ for rich, visual test reports.
+__* Extensive logging__ to support debugging and traceability.
+__* Failure-proofing techniques__ to increase test stability and reduce flakiness.
 
 The repository provides reference implementations for all these components. Use this project as guidance when building or improving your own automation framework. Instead of copying code directly, explore the structure, patterns, and design decisions to understand how each part contributes to a scalable and robust automation setup.
 
