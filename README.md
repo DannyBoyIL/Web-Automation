@@ -1,10 +1,7 @@
 # Web-Automation
-Automation project for web application using Python &amp; Selenium. POM | BDD | CI/CD
-
-This repository contains example code for the
-*Behavior-Driven Python with pytest-bdd* course
-from [Test Automation University](https://testautomationu.applitools.com/).
-There is a branch for each chapter of the course showing the state of the code at the completion of the chapter.
+This automation project for web application repository contains example code for the
+*Behavior-Driven Python with pytest-bdd &amp; Selenium*.
+The stack includes the implementation of the following: POM | BDD | CI/CD | Docker | Allure Reporting | Logging | Failue Proofing
 
 
 ## Repository Purpose
@@ -21,13 +18,6 @@ If you get stuck while building your own project,
 compare your code to the example code in this repository.
 However, try to avoid blindly copying code from the repository into your project.
 Take the time to learn the concepts and code presented in each chapter.
-
-
-## Repository Branches
-
-* Each `chapter/*` branch contains the state of the code for each chapter
-* The `main` branch contains the final state of the code at the end of the course
-
 
 ## Python Setup
 
@@ -105,10 +95,6 @@ For simplicity, this course will not use or teach virtual environments.
 If you would like to learn virtual environments on your own, then RealPython's article
 [Python Virtual Environments: A Primer](https://realpython.com/python-virtual-environments-a-primer/)
 is an excellent place to start.
-
-### Package Versions
-
-The [`requirements.txt`](requirements.txt) file contains the versions for each package used in this course.
 
 
 ## Running Tests
