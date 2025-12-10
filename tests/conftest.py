@@ -8,7 +8,6 @@ import allure
 import os
 import selenium.webdriver
 from selenium.webdriver import SafariOptions
-from selenium.webdriver.remote.webdriver import WebDriver
 from utils.logger import log
 
 @pytest.fixture(scope="session")
@@ -60,41 +59,78 @@ def browser(config):
     browser.quit()
 
 
+# @pytest.hookimpl(tryfirst=True, hookwrapper=True)
+# def pytest_runtest_makereport(item, call):
+#     """
+#     Hook for each test case that creates a report and a screenshot.
+#     """
+#     outcome = yield
+#     report = outcome.get_result()
+#
+#     if report.when == 'call' and report.failed:
+#
+#         # Screenshot handler
+#         try:
+#             driver = item.funcargs.get('browser')
+#
+#             if driver:
+#                 # File path
+#                 screenshot_dir = "screenshots"
+#                 os.makedirs(screenshot_dir, exist_ok=True)
+#                 test_name = report.nodeid.replace("::", "_").replace("/", "_").replace(".py", "")
+#                 screenshot_path = os.path.join(screenshot_dir, f"{test_name}_FAILURE.png")
+#
+#                 # Save screenshot
+#                 driver.save_screenshot(screenshot_path)
+#                 log.error(f"Test '{test_name}' failed. Screenshot saved to: {screenshot_path}")
+#
+#                 # Append to Allure report
+#                 allure.attach.file(
+#                     screenshot_path,
+#                     name=f"Failure Screenshot: {test_name}",
+#                     attachment_type=allure.attachment_type.PNG
+#                 )
+#             else:
+#                 log.warning("Driver object not available for screenshot capture.")
+#
+#         except Exception as e:
+#             # Prevents Pytest failure for screenshots
+#             log.error(f"An error occurred during screenshot process: {e}")
+#             pass
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
 def pytest_runtest_makereport(item, call):
-    """
-    Hook for each test case that creates a report and a screenshot.
-    """
     outcome = yield
     report = outcome.get_result()
 
-    if report.when == 'call' and report.failed:
+    if report.when == "call" and report.failed:
 
-        # Screenshot handler
+        # Grab the WebDriver even for BDD-style tests
         try:
-            driver: WebDriver = item.funcargs.get('browser')
-
-            if driver:
-                # File path
-                screenshot_dir = "screenshots"
-                os.makedirs(screenshot_dir, exist_ok=True)
-                test_name = report.nodeid.replace("::", "_").replace("/", "_").replace(".py", "")
-                screenshot_path = os.path.join(screenshot_dir, f"{test_name}_FAILURE.png")
-
-                # Save screenshot
-                driver.save_screenshot(screenshot_path)
-                log.error(f"Test '{test_name}' failed. Screenshot saved to: {screenshot_path}")
-
-                # Append to Allure report
-                allure.attach.file(
-                    screenshot_path,
-                    name=f"Failure Screenshot: {test_name}",
-                    attachment_type=allure.attachment_type.PNG
-                )
-            else:
-                log.warning("Driver object not available for screenshot capture.")
-
+            driver = item._request.getfixturevalue("browser")
         except Exception as e:
             # Prevents Pytest failure for screenshots
             log.error(f"An error occurred during screenshot process: {e}")
+            driver = None
             pass
+
+        if driver:
+            screenshot_dir = "screenshots"
+            os.makedirs(screenshot_dir, exist_ok=True)
+
+            test_name = report.nodeid.replace("::", "_").replace("/", "_").replace(".py", "")
+            screenshot_path = os.path.join(screenshot_dir, f"{test_name}_FAILURE.png")
+
+            # Save screenshot to disk
+            driver.save_screenshot(screenshot_path)
+
+            # Log
+            log.error(f"Screenshot saved to: {screenshot_path}")
+
+            # Attach to Allure
+            allure.attach.file(
+                screenshot_path,
+                name=f"Failure Screenshot - {test_name}",
+                attachment_type=allure.attachment_type.PNG,
+            )
+        else:
+            log.warning("WebDriver unavailable; screenshot not saved.")

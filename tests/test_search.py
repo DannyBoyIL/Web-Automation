@@ -18,16 +18,16 @@ def test_basic_wikipedia_search(browser, phrase):
     # When the user searches for "{phrase}"
     search_page.search(phrase)
 
-    # Then the search result page body header contains "python"
-    assert  phrase == result_page.header_value().lower()
+    # Then the search result page body header contains "{phrase}"
+    assert phrase == result_page.header_value().lower()
 
     # And content body is present
     assert result_page.body_content().is_displayed()
 
-    # And the search result page title contains "python"
+    # And the search result page title contains "{phrase}"
     assert result_page.title().lower().find(phrase) != -1
 
-    # And the URL ends with "/wiki/Python"
+    # And the URL ends with "/wiki/{phrase}"
     assert result_page.url().lower().endswith(f"wiki/{phrase.replace(" ", "_")}")
 
     # raise Exception("Incomplete test")
