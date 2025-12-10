@@ -5,19 +5,17 @@ The stack includes the implementation of the following: POM | BDD | CI/CD | Dock
 
 
 ## Repository Purpose
+This project serves as a comprehensive example of a modern web automation framework built around simple Wikipedia search‑result page capabilities. It demonstrates a full end-to-end implementation of best practices used in professional QA automation, including:
 
-The best way to learn pytest is through hands-on coding.
-In the first lesson of the course, you will create a new Python project for test cases.
-(That project will *not* be the same as this repository.)
-Each chapter then introduces new concepts and provides coding instructions for your project.
-If you code along with each chapter,
-then you will have a complete, functioning test automation project by the end of the course.
+* Page Object Model (POM) for clean, maintainable test architecture.
+* Behaviour-Driven Development (BDD) using readable, business-oriented scenarios.
+* CI/CD integration for automated test execution in pipelines.
+* Dockerized test environments for consistent and reproducible runs.
+* Allure Reporting for rich, visual test reports.
+* Extensive logging to support debugging and traceability.
+* Failure-proofing techniques to increase test stability and reduce flakiness.
 
-This repository provides all example code for the project.
-If you get stuck while building your own project,
-compare your code to the example code in this repository.
-However, try to avoid blindly copying code from the repository into your project.
-Take the time to learn the concepts and code presented in each chapter.
+The repository provides reference implementations for all these components. Use this project as guidance when building or improving your own automation framework. Instead of copying code directly, explore the structure, patterns, and design decisions to understand how each part contributes to a scalable and robust automation setup.
 
 ## Python Setup
 
