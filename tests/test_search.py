@@ -8,9 +8,10 @@ from pages.result import WikipediaResultPage
 from pages.search import WikipediaSearchPage
 
 @pytest.mark.parametrize('phrase', ['python', 'polar bear', 'panda'])
-def test_basic_wikipedia_search(browser, phrase):
-    search_page = WikipediaSearchPage(browser)
-    result_page = WikipediaResultPage(browser)
+def test_basic_wikipedia_search(json_browser, phrase):
+
+    search_page = WikipediaSearchPage(json_browser)
+    result_page = WikipediaResultPage(json_browser)
 
     # Given the Wikipedia home page is displayed
     search_page.load()
