@@ -1,7 +1,6 @@
 # Web-Automation
 This automation project for web application repository contains example code for the
 *Behavior-Driven Python with pytest-bdd &amp; Selenium*.
-The stack includes the implementation of the following: POM | BDD | CI/CD | Docker | Allure Reporting | Logging | Failue Proofing
 
 
 ## Repository Purpose
@@ -17,6 +16,7 @@ This project serves as a comprehensive example of a modern web automation framew
 
 The repository provides reference implementations for all these components. Use this project as guidance when building or improving your own automation framework. Instead of copying code directly, explore the structure, patterns, and design decisions to understand how each part contributes to a scalable and robust automation setup.
 
+
 ## Python Setup
 
 Python setup can be complicated.
@@ -24,16 +24,9 @@ This section documents how to set up your machine for Python test automation dev
 
 ### Python Installation and Tools
 
-You can complete this course using any OS: Windows, macOS, Linux, etc.
-
-This course requires Python 3.
+This application requires Python 3.12.
 You can download the latest Python version from [Python.org](https://www.python.org/downloads/).
 Follow the appropriate installation instructions for your operating system.
-
-You should have basic Python programming skills before attempting this course.
-Learning the language is always a prerequisite for learning automation.
-If you need help learning Python, check out this article:
-[How Do I Start Learning Python?](https://automationpanda.com/2020/02/18/how-do-i-start-learning-python/)
 
 You should also have a good Python editor/IDE.
 Good choices include [PyCharm](https://www.jetbrains.com/pycharm/)
@@ -44,7 +37,6 @@ If you are new to Git, [try learning the basics](https://try.github.io/).
 
 For Web UI tests, install the appropriate browser and WebDriver executable.
 These tests use Firefox and [geckodriver](https://github.com/mozilla/geckodriver/releases).
-
 
 ### Python Installation Troubleshooting
 
@@ -68,31 +60,21 @@ and try running Python again.
 
 ### Python Packages
 
-This course will use a handful of third-party packages that are *not* part of the Python Standard Library.
+This application uses third-party packages that are *not* part of the Python Standard Library.
 They must be installed separately using `pip`, the standard Python package installer.
-You can install them all before you create your test project,
-or you can install them as you complete each chapter in the course.
+You can install them all before you create your test project.
 
-To install each package, enter `pip install <package-name>` at the command line.
-For example: `pip install pytest`.
+To install each package, enter `pip3 install <package-name>` at the command line.
+For example: `pip3 install pytest`.
 If you already have a package installed but need to upgrade its version,
-run `pip install --upgrade <package-name>`.
-
-Please note that if you need to use the `python3` command to run Python,
-then you might also need to use the `pip3` command in lieu of `pip`.
+run `pip3 install --upgrade <package-name>`.
 
 ### Virtual Environments
 
-Running `pip install` will install the pytest package globally for the whole system.
-Installing Python packages globally is okay for this course,
-but it typically isn't a best practice in the "read world."
+Running `pipenv install` will install the pytest package locally inside the project ecosystem, while running `pip3 install` will install the pytest package globally for the whole system.
+Installing Python packages globally is okay, but it typically isn't a best practice.
 Instead, each project should manage its own dependencies locally using a virtual environment.
 Virtual environments let projects avoid unnecessary dependencies and version mismatches.
-
-For simplicity, this course will not use or teach virtual environments.
-If you would like to learn virtual environments on your own, then RealPython's article
-[Python Virtual Environments: A Primer](https://realpython.com/python-virtual-environments-a-primer/)
-is an excellent place to start.
 
 
 ## Running Tests
