@@ -77,6 +77,52 @@ Instead, each project should manage its own dependencies locally using a virtual
 Virtual environments let projects avoid unnecessary dependencies and version mismatches.
 
 
+## Docker Setup
+
+This project uses Docker to ensure consistent and reproducible test environments.
+
+### Install Docker
+
+Download and install Docker Desktop for your operating system. After installation, verify it works by running:
+docker --version
+You should see the installed Docker version printed.
+
+### Running Tests in Docker
+
+The repository includes Docker configurations that allow you to run the entire test suite inside a containerized environment. Once Docker is installed, you can build and run the test image:
+docker build -t automation-tests .
+docker run automation-tests
+These commands ensure your tests run in a clean, isolated environment every time.
+
+
+## Allure Setup
+
+Allure Reporting provides rich, visual test reports generated from your framework.
+
+### Install Allure
+
+You must install Allure locally to view reports.
+
+macOS (Homebrew):
+brew install allure
+
+Windows: Download the Allure ZIP from the official distribution page, extract it, and add the bin folder to your system path.
+
+Linux:
+sudo apt-add-repository ppa:qameta/allure
+sudo apt-get update
+sudo apt-get install allure
+
+### Verify installation:
+
+allure --version
+Viewing Test Reports
+
+After running your tests, an Allure results folder will be created. To generate and view the report:
+allure serve allure-results
+This command builds the report and opens it in your browser.
+
+
 ## Running Tests
 
 To run the example tests from the command line, run `python -m pytest` from the project root directory.
