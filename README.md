@@ -260,7 +260,6 @@ allure serve allure-results
 ```
 
 
-
 ## 🛠️ Troubleshooting
 A collection of common issues and quick fixes for running the web-automation project.
 
@@ -302,105 +301,95 @@ macOS/Linux: add to `.zshrc` or `.bashrc`
 Windows: add to _Environment Variables_ → _User Variables_ → _PYTHONPATH_
 
 ### Pytest Problems
-Pytest can't discover tests
-
+__Pytest can't discover tests__
 Fix:
-
-Ensure test filenames follow: test_*.py
-
-Ensure the folder contains an __init__.py if needed
-
-Run with explicit path:
-
+* Ensure test filenames follow: `test_*.py`
+* Ensure the folder contains an `__init__.py` if needed
+* Run with explicit path:
+```bash
 pipenv run pytest tests/
+```
 
-Parallel tests fail (xdist)
-
+__Parallel tests fail (xdist)__
 Usually caused by WebDriver sessions overwriting each other.
 
 Fix:
-
-Use isolated sessions per worker
-
-Or disable parallel for debugging:
-
+* Use isolated sessions per worker
+* Or disable parallel for debugging:
+```bash
 pipenv run pytest -n 1
+```
 
 ### Docker / Selenium Grid Issues
-Selenium Hub not reachable
-
+__Selenium Hub not reachable__
 Symptom:
-selenium.common.exceptions.WebDriverException: hub unreachable
+`selenium.common.exceptions.WebDriverException: hub unreachable`
 
 Fix:
-
+```bash
 docker-compose down
 docker-compose up -d
-
+```
 
 Check containers:
-
+```bash
 docker ps
-
+```
 
 Hub must be running at:
-
+```bash
 http://localhost:4444
+```
 
-Nodes not registering to Hub
-
+__Nodes not registering to Hub__
 Fix:
 Nodes must match Hub’s platform.
 
 Apple Silicon (M1/M2/M3) requires:
-
+```bash
 docker pull --platform linux/amd64 selenium/node-chrome
-
+```
 
 Then restart Grid:
-
+```bash
 docker-compose down
 docker-compose up -d
+```
 
-Browser crashes instantly
-
+__Browser crashes instantly__
 Memory limit too low.
 
 Fix (Linux/macOS):
-
+```bash
 sudo sysctl -w kernel.shmmax=268435456
+```
 
 ### Allure Issues
-No results appear in the report
-
+__No results appear in the report__
 Symptom:
 Allure opens a report with 0 tests.
 
 Fix:
-
-Ensure pytest Allure plugin is installed:
-
+* Ensure pytest Allure plugin is installed:
+```bash
 pipenv install allure-pytest
-
-
-Ensure tests were run before generating:
-
+```
+* Ensure tests were run before generating:
+```bash
 pipenv run pytest
+```
 
-allure: command not found
-
+__`allure: command not found`__
 Install Allure:
-
-macOS:
-
+* macOS:
+```bash
 brew install allure
-
-
-Windows: Add allure\bin to PATH
-
-Linux:
-
+```
+* Windows: Add `allure\bin` to PATH
+* Linux:
+```bash
 sudo apt-get install allure
+```
 
 ### WebDriver Issues
 GeckoDriver not found
