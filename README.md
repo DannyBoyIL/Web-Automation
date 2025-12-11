@@ -252,7 +252,7 @@ pipenv install selenium pytest pytest-xdist webdriver-manager pytest-bdd pyyaml 
 ```
 Verify the initial test:
 ```bash
-pipenv run pytest --ignore=tests/step_defs
+pipenv run pytest tests/test_fw.py
 ```
 
 ### Running the Full Test Suite
