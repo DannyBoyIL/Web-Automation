@@ -235,17 +235,13 @@ docker-compose up -d --scale chrome=2 --scale firefox=4
 ```
 
 ### Installing Python Packages
-Install project dependencies with Pipenv:
+Install project dependencies with Pipenv manually, if `pipenv shell` did not activate the environment:
 ```bash
-pipenv install selenium pytest pytest-xdist webdriver-manager pytest-bdd pyyaml
+pipenv install selenium pytest pytest-xdist webdriver-manager pytest-bdd pyyaml allure-pytest
 ```
 Verify the initial test:
 ```bash
 pipenv run pytest
-```
-Install Allure integration:
-```bash
-pipenv install allure-pytest
 ```
 
 ### Running the Full Test Suite
