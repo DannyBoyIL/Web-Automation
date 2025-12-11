@@ -212,24 +212,18 @@ macOS (Apple Silicon + Intel)
 ```bash
 docker pull --platform linux/amd64 selenium/node-chrome:4.21.0
 docker pull --platform linux/amd64 selenium/node-firefox:4.21.0
-docker pull --platform linux/amd64 selenium/node-chrome-debug:4.21.0
-docker pull --platform linux/amd64 selenium/node-firefox-debug:4.21.0
 ```
 Windows/Linux
 ```bash
 docker pull selenium/node-chrome:4.21.0
 docker pull selenium/node-firefox:4.21.0
-docker pull selenium/node-chrome-debug:4.21.0
-docker pull selenium/node-firefox-debug:4.21.0
 ```
 
 By verifying the images again `docker images`, you should see:
 ```bash
 IMAGE                                ID             DISK USAGE   CONTENT SIZE   EXTRA
-selenium/hub:4.21.0                  f269ed6bcd3f        966MB          327MB        
-selenium/node-chrome-debug:4.21.0    4205fd019f4c       1.63GB          436MB        
-selenium/node-chrome:4.21.0          239eacca7175       3.02GB          931MB        
-selenium/node-firefox-debug:4.21.0   15f9830958b3       1.46GB          384MB        
+selenium/hub:4.21.0                  f269ed6bcd3f        966MB          327MB          
+selenium/node-chrome:4.21.0          239eacca7175       3.02GB          931MB             
 selenium/node-firefox:4.21.0         549284752c8c       2.93GB          903MB        
 ```
 
