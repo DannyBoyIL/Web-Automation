@@ -288,6 +288,20 @@ Force Pipenv to use Python 3.12:
 pipenv --python 3.12
 ```
 
+__`.venv` folder not created inside the project__
+
+Symptom: 
+After running `pipenv install`, no `.venv` folder appears in the repository, even though the environment exists.
+__Cause__: Pipenv stores virtual environments __outside the project__ by default.
+Fix (enable project-local venv):
+```bash
+export PIPENV_VENV_IN_PROJECT=1
+pipenv --rm
+pipenv install
+```
+
+This recreates the environment inside `./.venv/`.
+
 ### Python Path Problems
 __`ModuleNotFoundError` for project imports__
 
