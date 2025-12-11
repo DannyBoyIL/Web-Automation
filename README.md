@@ -258,3 +258,178 @@ pipenv run python -m pytest -k "web"
 ```bash
 allure serve allure-results
 ```
+
+
+## 🛠️ Troubleshooting
+
+A collection of common issues and quick fixes for running the web-automation project.
+
+### Pipenv Issues
+__Pipenv environment not activating__
+
+Symptom:
+`pipenv run pytest` fails or packages aren’t found.
+
+Fix:
+```bash
+pipenv --rm
+pipenv install
+pipenv shell
+```
+
+__Conflicts with global Python installations__
+
+Symptom:
+`python --version` prints a different version than expected.
+
+Fix:
+Force Pipenv to use Python 3.12:
+```bash
+pipenv --python 3.12
+```
+
+### Python Path Problems
+__`ModuleNotFoundError` for project imports__
+
+Symptom:
+Imports like from pages.home_page import HomePage fail when running tests.
+
+Fix:
+Add the project root to PYTHONPATH:
+
+export PYTHONPATH=.
+
+
+macOS/Linux: add to .zshrc or .bashrc
+Windows: add to Environment Variables → User Variables → PYTHONPATH
+
+### Pytest Problems
+Pytest can't discover tests
+
+Fix:
+
+Ensure test filenames follow: test_*.py
+
+Ensure the folder contains an __init__.py if needed
+
+Run with explicit path:
+
+pipenv run pytest tests/
+
+Parallel tests fail (xdist)
+
+Usually caused by WebDriver sessions overwriting each other.
+
+Fix:
+
+Use isolated sessions per worker
+
+Or disable parallel for debugging:
+
+pipenv run pytest -n 1
+
+### Docker / Selenium Grid Issues
+Selenium Hub not reachable
+
+Symptom:
+selenium.common.exceptions.WebDriverException: hub unreachable
+
+Fix:
+
+docker-compose down
+docker-compose up -d
+
+
+Check containers:
+
+docker ps
+
+
+Hub must be running at:
+
+http://localhost:4444
+
+Nodes not registering to Hub
+
+Fix:
+Nodes must match Hub’s platform.
+
+Apple Silicon (M1/M2/M3) requires:
+
+docker pull --platform linux/amd64 selenium/node-chrome
+
+
+Then restart Grid:
+
+docker-compose down
+docker-compose up -d
+
+Browser crashes instantly
+
+Memory limit too low.
+
+Fix (Linux/macOS):
+
+sudo sysctl -w kernel.shmmax=268435456
+
+### Allure Issues
+No results appear in the report
+
+Symptom:
+Allure opens a report with 0 tests.
+
+Fix:
+
+Ensure pytest Allure plugin is installed:
+
+pipenv install allure-pytest
+
+
+Ensure tests were run before generating:
+
+pipenv run pytest
+
+allure: command not found
+
+Install Allure:
+
+macOS:
+
+brew install allure
+
+
+Windows: Add allure\bin to PATH
+
+Linux:
+
+sudo apt-get install allure
+
+### WebDriver Issues
+GeckoDriver not found
+
+Install with webdriver-manager (already in project):
+
+pipenv install webdriver-manager
+
+
+Use GeckoDriverManager() instead of local binary.
+
+Browser cannot start: “DevToolsActivePort file doesn’t exist”
+
+This happens in Docker or CI environments.
+
+Fix:
+Add proper browser options (already included in most setups):
+
+options.add_argument("--no-sandbox")
+options.add_argument("--disable-dev-shm-usage")
+
+### Permissions / OS Issues
+zsh: permission denied when running scripts
+chmod +x <script_name>
+
+Windows: tests hang or fail silently
+
+Run terminal as Administrator
+OR
+Disable long path restrictions.
