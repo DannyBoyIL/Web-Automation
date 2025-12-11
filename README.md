@@ -49,7 +49,6 @@ The repository provides reference implementations for all these components. Use 
 
 
 ## Project Structure
-<details> <summary><strong>Click to expand</strong></summary>
 ```graghql
 web-automation/
 │
@@ -64,7 +63,6 @@ web-automation/
 ├── README.md
 └── pytest.ini
 ```
-</details>
 
 
 ## Python Setup
