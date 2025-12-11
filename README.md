@@ -260,6 +260,7 @@ allure serve allure-results
 ```
 
 
+
 ## 🛠️ Troubleshooting
 A collection of common issues and quick fixes for running the web-automation project.
 
@@ -289,16 +290,16 @@ pipenv --python 3.12
 __`ModuleNotFoundError` for project imports__
 
 Symptom:
-Imports like from pages.home_page import HomePage fail when running tests.
+Imports like from `pages.home_page import HomePage` fail when running tests.
 
 Fix:
 Add the project root to PYTHONPATH:
-
+```bash
 export PYTHONPATH=.
+```
 
-
-macOS/Linux: add to .zshrc or .bashrc
-Windows: add to Environment Variables → User Variables → PYTHONPATH
+macOS/Linux: add to `.zshrc` or `.bashrc`
+Windows: add to _Environment Variables_ → _User Variables_ → _PYTHONPATH_
 
 ### Pytest Problems
 Pytest can't discover tests
