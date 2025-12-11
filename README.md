@@ -1,4 +1,4 @@
-# Web-Automation
+# Web Automation Framework (Python · Selenium · Pytest-BDD)
 This automation project for web application repository contains example code for the
 *Behavior-Driven Python with pytest-bdd &amp; Selenium*.
 
