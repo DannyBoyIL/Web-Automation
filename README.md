@@ -22,7 +22,7 @@ allure generate --clean allure-results
 Run test via xdist (recommended for first checkup*):
 ```bash
 # 5. Run tests
-pipenv run pytest --ignore=tests/step_defs
+pipenv run pytest tests/test_fw.py
 
 # Optional: run in parallel
 pipenv run pytest -n 4 --ignore=tests/step_defs
