@@ -66,7 +66,7 @@ web-automation/
 ├── utils/                  # Helpers (logging, configs, waiters, etc.)
 │
 ├── docker-compose.yml
-├── Dockerfile
+├── Dockerfile              * Here will go the Dockerfile for more complex systems
 ├── Pipfile / Pipfile.lock
 ├── README.md
 └── pytest.ini
