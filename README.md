@@ -65,7 +65,7 @@ web-automation/
 
 
 ## Python Setup
-
+<details> <summary><strong>Click to expand</strong></summary>
 Python setup can be complicated.
 This section documents how to set up your machine for Python test automation development.
 
@@ -122,10 +122,11 @@ Running `pipenv install` will install the pytest package locally inside the proj
 Installing Python packages globally is okay, but it typically isn't a best practice.
 Instead, each project should manage its own dependencies locally using a virtual environment.
 Virtual environments let projects avoid unnecessary dependencies and version mismatches.
+</details>
 
 
 ## Docker Setup
-
+<details> <summary><strong>Click to expand</strong></summary>
 This project uses Docker to ensure consistent and reproducible test environments.
 
 ### Install Docker
@@ -144,10 +145,11 @@ docker build -t automation-tests .
 docker run automation-tests
 ```
 These commands ensure your tests run in a clean, isolated environment every time.
+</details>
 
 
 ## Allure Setup
-
+<details> <summary><strong>Click to expand</strong></summary>
 Allure Reporting provides rich, visual test reports generated from your framework.
 
 ### Install Allure
@@ -180,6 +182,7 @@ After running your tests, an Allure results folder will be created. To generate 
 allure serve allure-results
 ```
 This command builds the report and opens it in your browser.
+</details>
 
 
 ## Running Tests
