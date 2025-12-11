@@ -41,11 +41,7 @@ pipenv run python -m pytest -k "web"
 # Optional: generate Allure report
 allure serve allure-results
 ```
-```bash
-# Optional: build & run with Docker
-docker build -t automation-tests .
-docker run automation-tests
-```
+
 
 ## Repository Purpose
 This project serves as a comprehensive example of a modern web automation framework built around simple Wikipedia search‑result page capabilities. It demonstrates a full end-to-end implementation of best practices used in professional QA automation, including:
