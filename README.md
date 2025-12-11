@@ -393,31 +393,32 @@ sudo apt-get install allure
 ```
 
 ### WebDriver Issues
-GeckoDriver not found
+__`GeckoDriver not found`__
 
 Install with webdriver-manager (already in project):
-
+```bash
 pipenv install webdriver-manager
+```
 
+Use `GeckoDriverManager()` instead of local binary.
 
-Use GeckoDriverManager() instead of local binary.
-
-Browser cannot start: “DevToolsActivePort file doesn’t exist”
-
+__Browser cannot start: “DevToolsActivePort file doesn’t exist”__
 This happens in Docker or CI environments.
 
 Fix:
 Add proper browser options (already included in most setups):
-
+```bash
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
+```
 
 ### Permissions / OS Issues
-zsh: permission denied when running scripts
+__`zsh: permission denied` when running scripts__
+```bash
 chmod +x <script_name>
+```
 
-Windows: tests hang or fail silently
-
+__Windows: tests hang or fail silently__
 Run terminal as Administrator
 OR
 Disable long path restrictions.
