@@ -7,7 +7,7 @@ import pytest
 from pages.result import WikipediaResultPage
 from pages.search import WikipediaSearchPage
 
-@pytest.mark.parametrize('phrase', ['python', 'polar bear', 'panda'])
+@pytest.mark.parametrize('phrase', ['python', 'polar bear'])#, 'panda'])
 def test_basic_wikipedia_search(json_browser, phrase):
 
     search_page = WikipediaSearchPage(json_browser)

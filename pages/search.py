@@ -2,7 +2,6 @@
 This module contains WikipediaSearchPage,
 The page object for the Wikipedia search page.
 """
-from selenium.common import NoSuchElementException
 
 from utils.logger import log
 from selenium.webdriver.common.by import By
