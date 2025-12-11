@@ -419,6 +419,9 @@ chmod +x <script_name>
 ```
 
 __Windows: tests hang or fail silently__
+
 Run terminal as Administrator 
+
 OR 
+
 Disable long path restrictions.
