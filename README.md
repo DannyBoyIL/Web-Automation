@@ -261,12 +261,10 @@ allure serve allure-results
 
 
 ## 🛠️ Troubleshooting
-
 A collection of common issues and quick fixes for running the web-automation project.
 
 ### Pipenv Issues
 __Pipenv environment not activating__
-
 Symptom:
 `pipenv run pytest` fails or packages aren’t found.
 
@@ -278,7 +276,6 @@ pipenv shell
 ```
 
 __Conflicts with global Python installations__
-
 Symptom:
 `python --version` prints a different version than expected.
 
