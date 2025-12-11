@@ -40,6 +40,9 @@ pipenv run python -m pytest -k "web"
 
 # Optional: generate Allure report
 allure serve allure-results
+
+# Optional: verify the Grid 
+http://localhost:4444/grid/console
 ```
 
 
@@ -170,10 +173,7 @@ docker run -d --net grid --platform linux/amd64 \ --name chrome-node -e SE_EVENT
 docker run -d --net grid --platform linux/amd64 \ --name firefox-node -e SE_EVENT_BUS_HOST=selenium-hub selenium/node-firefox:4.21.0
 ```
 
-Once the containers are running, verify the Grid is ready:
-```bash
-http://localhost:4444/ui
-```
+Once the containers are running, verify the Grid is ready: http://localhost:4444/grid/console
 </details>
 
 
