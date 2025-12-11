@@ -47,8 +47,7 @@ This project serves as a comprehensive example of a modern web automation framew
 
 The repository provides reference implementations for all these components. Use this project as guidance when building or improving your own automation framework. Instead of copying code directly, explore the structure, patterns, and design decisions to understand how each part contributes to a scalable and robust automation setup.
 
-
-## Project Structure
+### Project Structure
 ```graghql
 web-automation/
 │
