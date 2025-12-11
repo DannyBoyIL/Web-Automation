@@ -17,9 +17,7 @@ pipenv install
 pipenv shell
 
 # 4. Generate and open an Allure session
-allure generate
 allure generate --clean allure-results
-allure generate --clean allure-results && allure open
 ```
 Run test via xdist (recommended for first checkup*):
 ```bash
