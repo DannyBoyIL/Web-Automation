@@ -4,7 +4,7 @@ This automation project for web application repository contains example code for
 
 
 ## Quick Start
-For users who just want to run the project quickly:
+For users who want to run the project quickly:
 ```bash
 # 1. Clone repo
 git clone <repo-url>
@@ -16,23 +16,36 @@ pipenv install
 # 3. Activate environment
 pipenv shell
 
-# 4. Run tests
-pipenv run pytest
-
-# 5. Run test via Gherkin
-pipenv run python -m pytest -k "web"
+# 4. Generate and open an Allure session
+allure generate --clean allure-results && allure open
+```
+Run test via xdist (recommended for first checkup*):
+```bash
+# 5. Run tests
+pipenv run pytest --ignore=tests/step_defs
 
 # Optional: run in parallel
-pipenv run pytest -n 4
-
-# Optional: build & run with Docker
-docker build -t automation-tests .
-docker run automation-tests
+pipenv run pytest -n 4 --ignore=tests/step_defs
 
 # Optional: generate Allure report
 allure serve allure-results
 ```
+Run test via BDD (Gherkin):
+```bash
+# 5. Start Selenium Grid
+docker-compose up -d --scale chrome=2 --scale firefox=4
 
+# 5. Run tests 
+pipenv run python -m pytest -k "web"
+
+# Optional: generate Allure report
+allure serve allure-results
+```
+```bash
+# Optional: build & run with Docker
+docker build -t automation-tests .
+docker run automation-tests
+```
 
 ## Repository Purpose
 This project serves as a comprehensive example of a modern web automation framework built around simple Wikipedia search‑result page capabilities. It demonstrates a full end-to-end implementation of best practices used in professional QA automation, including:
