@@ -3,6 +3,37 @@ This automation project for web application repository contains example code for
 *Behavior-Driven Python with pytest-bdd &amp; Selenium*.
 
 
+## Quick Start
+For users who just want to run the project quickly:
+```
+# 1. Clone repo
+git clone <repo-url>
+cd web-automation
+
+# 2. Install dependencies
+pipenv install
+
+# 3. Activate environment
+pipenv shell
+
+# 4. Run tests
+pipenv run pytest
+
+# 5. Run test via Gherkin
+pipenv run python -m pytest -k "web"
+
+# Optional: run in parallel
+pipenv run pytest -n 4
+
+# Optional: build & run with Docker
+docker build -t automation-tests .
+docker run automation-tests
+
+# Optional: generate Allure report
+allure serve allure-results
+```
+
+
 ## Repository Purpose
 This project serves as a comprehensive example of a modern web automation framework built around simple Wikipedia search‑result page capabilities. It demonstrates a full end-to-end implementation of best practices used in professional QA automation, including:
 
