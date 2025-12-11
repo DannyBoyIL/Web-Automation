@@ -200,7 +200,7 @@ This project uses Dockerized Selenium Grid and Pipenv-based Python tooling to ru
 ### Pulling Selenium Hub to Docker Desktop
 After Docker Desktop is installed, pull the Selenium Hub image:
 ```bash
-docker pull selenium/hub:latest
+docker pull selenium/hub
 ```
 Verify the image:
 ```bash
@@ -225,12 +225,12 @@ docker pull selenium/node-firefox-debug
 
 By verifying the images again `docker images`, you should see:
 ```bash
-IMAGE                                ID             DISK USAGE   CONTENT SIZE   EXTRA
-selenium/hub:latest                  f269ed6bcd3f        966MB          327MB        
-selenium/node-chrome-debug:latest    4205fd019f4c       1.63GB          436MB        
-selenium/node-chrome:latest          239eacca7175       3.02GB          931MB        
-selenium/node-firefox-debug:latest   15f9830958b3       1.46GB          384MB        
-selenium/node-firefox:latest         549284752c8c       2.93GB          903MB        
+IMAGE                         ID             DISK USAGE   CONTENT SIZE   EXTRA
+selenium/hub                  f269ed6bcd3f        966MB          327MB        
+selenium/node-chrome-debug    4205fd019f4c       1.63GB          436MB        
+selenium/node-chrome          239eacca7175       3.02GB          931MB        
+selenium/node-firefox-debug   15f9830958b3       1.46GB          384MB        
+selenium/node-firefox         549284752c8c       2.93GB          903MB        
 ```
 
 ### Running the Selenium Grid
