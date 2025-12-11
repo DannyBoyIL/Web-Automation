@@ -48,6 +48,25 @@ This project serves as a comprehensive example of a modern web automation framew
 The repository provides reference implementations for all these components. Use this project as guidance when building or improving your own automation framework. Instead of copying code directly, explore the structure, patterns, and design decisions to understand how each part contributes to a scalable and robust automation setup.
 
 
+## Project Structure
+<details> <summary><strong>Click to expand</strong></summary>
+```graghql
+web-automation/
+│
+├── features/               # BDD .feature files
+├── pages/                  # Page Object Model implementation
+├── tests/                  # Test step definitions & glue code
+├── utils/                  # Helpers (logging, configs, waiters, etc.)
+│
+├── docker-compose.yml
+├── Dockerfile
+├── Pipfile / Pipfile.lock
+├── README.md
+└── pytest.ini
+```
+</details>
+
+
 ## Python Setup
 
 Python setup can be complicated.
