@@ -115,7 +115,7 @@ This project uses Docker to ensure consistent and reproducible test environments
 ### Install Docker
 
 Download and install Docker Desktop for your operating system. After installation, verify it works by running:
-```
+```bash
 docker --version
 ```
 You should see the installed Docker version printed.
@@ -123,7 +123,7 @@ You should see the installed Docker version printed.
 ### Running Tests in Docker
 
 The repository includes Docker configurations that allow you to run the entire test suite inside a containerised environment. Once Docker is installed, you can build and run the test image:
-```
+```bash
 docker build -t automation-tests .
 docker run automation-tests
 ```
@@ -139,28 +139,28 @@ Allure Reporting provides rich, visual test reports generated from your framewor
 You must install Allure locally to view reports.
 
 macOS (Homebrew):
-```
+```bash
 brew install allure
 ```
 
 Windows: Download the Allure ZIP from the official distribution page, extract it, and add the bin folder to your system path.
 
 Linux:
-```linux
+```bash
 sudo apt-add-repository ppa:qameta/allure
 sudo apt-get update
 sudo apt-get install allure
 ```
 
 Verify installation:
-```
+```bash
 allure --version
 ```
 
 ### Viewing Test Reports
 
 After running your tests, an Allure results folder will be created. To generate and view the report:
-```
+```bash
 allure serve allure-results
 ```
 This command builds the report and opens it in your browser.
@@ -171,24 +171,24 @@ This project uses Dockerized Selenium Grid and Pipenv-based Python tooling to ru
 
 ### Pulling Selenium Hub to Docker Desktop
 After Docker Desktop is installed, pull the Selenium Hub image:
-```
+```bash
 docker pull selenium/hub:latest
 ```
 Verify the image:
-```
+```bash
 docker images
 ```
 
 ### Pulling Selenium Browser Nodes
 macOS (Apple Silicon + Intel)
-```
+```bash
 docker pull --platform linux/amd64 selenium/node-chrome
 docker pull --platform linux/amd64 selenium/node-firefox
 docker pull --platform linux/amd64 selenium/node-chrome-debug
 docker pull --platform linux/amd64 selenium/node-firefox-debug
 ```
 Windows/Linux
-```
+```bash
 docker pull selenium/node-chrome
 docker pull selenium/node-firefox
 docker pull selenium/node-chrome-debug
@@ -196,7 +196,7 @@ docker pull selenium/node-firefox-debug
 ```
 
 By verifying the images again `docker images`, you should see:
-```docker
+```bash
 IMAGE                                ID             DISK USAGE   CONTENT SIZE   EXTRA
 selenium/hub:latest                  f269ed6bcd3f        966MB          327MB        
 selenium/node-chrome-debug:latest    4205fd019f4c       1.63GB          436MB        
@@ -207,39 +207,39 @@ selenium/node-firefox:latest         549284752c8c       2.93GB          903MB
 
 ### Running the Selenium Grid
 Start Selenium Grid using Docker Compose:
-```
+```bash
 docker-compose up -d
 ```
 Scale browsers if necessary:
-```
+```bash
 docker-compose up -d --scale chrome=2 --scale firefox=4
 ```
 
 ### Installing Python Packages
 Install project dependencies with Pipenv:
-```
+```bash
 pipenv install selenium pytest pytest-xdist webdriver-manager pytest-bdd pyyaml
 ```
 Verify the initial test:
-```
+```bash
 pipenv run pytest
 ```
 Install Allure integration:
-```
+```bash
 pipenv install allure-pytest
 ```
 
 ### Running the Full Test Suite
 After verifying that `test_fw.py` passes:
 1. Generate and open an Allure session:
-```
+```bash
 allure generate --clean allure-results && allure open
 ```
 2. Run Python tests targeting the @web tag:
-```
+```bash
 pipenv run python -m pytest -k "web"
 ```
 3. View the Allure report:
-```
+```bash
 allure serve allure-results
 ```
