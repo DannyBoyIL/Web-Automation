@@ -206,6 +206,7 @@ Verify the image:
 ```bash
 docker images
 ```
+<hr>
 
 ### Pulling Selenium Browser Nodes
 macOS (Apple Silicon + Intel)
@@ -226,6 +227,7 @@ selenium/hub:4.21.0                  f269ed6bcd3f        966MB          327MB
 selenium/node-chrome:4.21.0          239eacca7175       3.02GB          931MB             
 selenium/node-firefox:4.21.0         549284752c8c       2.93GB          903MB        
 ```
+<hr>
 
 ### Running the Selenium Grid
 Start Selenium Grid using Docker Compose:
@@ -236,6 +238,7 @@ Scale browsers if necessary:
 ```bash
 docker-compose up -d --scale chrome=2 --scale firefox=4
 ```
+<hr>
 
 ### Installing Python Packages
 Install project dependencies with Pipenv manually, if `pipenv shell` did not activate the environment:
@@ -246,6 +249,7 @@ Verify the initial test:
 ```bash
 pipenv run pytest tests/test_fw.py
 ```
+<hr>
 
 ### Running the Full Test Suite
 After verifying that `test_fw.py` passes:
@@ -268,10 +272,10 @@ A collection of common issues and quick fixes for running the web-automation pro
 
 ### Pipenv Issues
 __Pipenv environment not activating__
-Symptom:
-`pipenv run pytest` fails or packages aren’t found.
 
-Fix:
+__Symptom__: `pipenv run pytest` fails or packages aren’t found.
+
+__Fix__:
 ```bash
 pipenv --rm
 pipenv install
@@ -279,21 +283,21 @@ pipenv shell
 ```
 
 __Conflicts with global Python installations__
-Symptom:
-`python --version` prints a different version than expected.
 
-Fix:
-Force Pipenv to use Python 3.12:
+__Symptom__: `python --version` prints a different version than expected.
+
+__Fix__: Force Pipenv to use Python 3.12:
 ```bash
 pipenv --python 3.12
 ```
 
 __`.venv` folder not created inside the project__
 
-Symptom: 
-After running `pipenv install`, no `.venv` folder appears in the repository, even though the environment exists.
+__Symptom__: After running `pipenv install`, no `.venv` folder appears in the repository, even though the environment exists.
+
 __Cause__: Pipenv stores virtual environments __outside the project__ by default.
-Fix (enable project-local venv):
+
+__Fix__ (enable project-local venv):
 ```bash
 export PIPENV_VENV_IN_PROJECT=1
 pipenv --rm
@@ -301,25 +305,26 @@ pipenv install
 ```
 
 This recreates the environment inside `./.venv/`.
+<hr>
 
 ### Python Path Problems
 __`ModuleNotFoundError` for project imports__
 
-Symptom:
-Imports like from `pages.home_page import HomePage` fail when running tests.
+__Symptom__: Imports like from `pages.home_page import HomePage` fail when running tests.
 
-Fix:
-Add the project root to PYTHONPATH:
+__Fix__: Add the project root to PYTHONPATH:
 ```bash
 export PYTHONPATH=.
 ```
 
 macOS/Linux: add to `.zshrc` or `.bashrc`
 Windows: add to _Environment Variables_ → _User Variables_ → _PYTHONPATH_
+<hr>
 
 ### Pytest Problems
 __Pytest can't discover tests__
-Fix:
+
+__Fix__:
 * Ensure test filenames follow: `test_*.py`
 * Ensure the folder contains an `__init__.py` if needed
 * Run with explicit path:
@@ -327,22 +332,22 @@ Fix:
 pipenv run pytest tests/
 ```
 
-__Parallel tests fail (xdist)__
-Usually caused by WebDriver sessions overwriting each other.
+__Parallel tests fail (xdist)__ Usually caused by WebDriver sessions overwriting each other.
 
-Fix:
+__Fix__:
 * Use isolated sessions per worker
 * Or disable parallel for debugging:
 ```bash
 pipenv run pytest -n 1
 ```
+<hr>
 
 ### Docker / Selenium Grid Issues
 __Selenium Hub not reachable__
-Symptom:
-`selenium.common.exceptions.WebDriverException: hub unreachable`
 
-Fix:
+__Symptom__: `selenium.common.exceptions.WebDriverException: hub unreachable`
+
+__Fix__:
 ```bash
 docker-compose down
 docker-compose up -d
@@ -359,8 +364,8 @@ http://localhost:4444
 ```
 
 __Nodes not registering to Hub__
-Fix:
-Nodes must match Hub’s platform.
+
+__Fix__: Nodes must match Hub’s platform.
 
 Apple Silicon (M1/M2/M3) requires:
 ```bash
@@ -374,19 +379,21 @@ docker-compose up -d
 ```
 
 __Browser crashes instantly__
+
 Memory limit too low.
 
-Fix (Linux/macOS):
+__Fix__ (Linux/macOS):
 ```bash
 sudo sysctl -w kernel.shmmax=268435456
 ```
+<hr>
 
 ### Allure Issues
 __No results appear in the report__
-Symptom:
-Allure opens a report with 0 tests.
 
-Fix:
+__Symptom__: Allure opens a report with 0 tests.
+
+__Fix__:
 * Ensure pytest Allure plugin is installed:
 ```bash
 pipenv install allure-pytest
@@ -408,6 +415,7 @@ brew install allure
 ```bash
 sudo apt-get install allure
 ```
+<hr>
 
 ### WebDriver Issues
 __`GeckoDriver not found`__
@@ -420,14 +428,16 @@ pipenv install webdriver-manager
 Use `GeckoDriverManager()` instead of local binary.
 
 __Browser cannot start: “DevToolsActivePort file doesn’t exist”__
+
 This happens in Docker or CI environments.
 
-Fix:
+__Fix__:
 Add proper browser options (already included in most setups):
 ```bash
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
 ```
+<hr>
 
 ### Permissions / OS Issues
 __`zsh: permission denied` when running scripts__
@@ -437,6 +447,6 @@ chmod +x <script_name>
 
 __Windows: tests hang or fail silently__
 
-Run terminal as Administrator 
-OR 
+Run terminal as Administrator<br> 
+__OR__<br> 
 Disable long path restrictions.
