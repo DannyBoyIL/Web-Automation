@@ -379,7 +379,7 @@ pipenv install allure-pytest
 pipenv run pytest
 ```
 
-#### `allure: command not found`
+__`allure: command not found`__
 
 Install Allure:
 * macOS:
