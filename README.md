@@ -164,7 +164,7 @@ docker pull selenium/node-chrome-debug
 docker pull selenium/node-firefox-debug
 ```
 
-By verifying the images again ´docker images´, you should see:
+By verifying the images again `docker images`, you should see:
 ```docker
 IMAGE                                ID             DISK USAGE   CONTENT SIZE   EXTRA
 selenium/hub:latest                  f269ed6bcd3f        966MB          327MB        
@@ -199,7 +199,7 @@ pipenv install allure-pytest
 ```
 
 ### Running the Full Test Suite
-After verifying that ´test_fw.py´ passes:
+After verifying that `test_fw.py` passes:
 1. Generate and open an Allure session:
 ```
 allure generate --clean allure-results && allure open
