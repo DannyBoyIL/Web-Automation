@@ -136,20 +136,79 @@ This command builds the report and opens it in your browser.
 
 
 ## Running Tests
+This project uses Dockerized Selenium Grid and Pipenv-based Python tooling to run the full automation suite.
 
-To run the example tests from the command line, run `python -m pytest` from the project root directory.
-This command will discover and run all tests in the project.
+### Pulling Selenium Hub to Docker Desktop
+After Docker Desktop is installed, pull the Selenium Hub image:
+```
+docker pull selenium/hub:latest
+```
+Verify the image:
+```
+docker images
+```
 
-You can also run tests using the shorter `pytest` command.
-However, I recommend always using the lengthier `python -m pytest` command.
-The lengthier command automatically adds the current directory to `sys.path`
-so that all modules in the project can be discovered.
+### Pulling Selenium Browser Nodes
+macOS (Apple Silicon + Intel)
+```
+docker pull --platform linux/amd64 selenium/node-chrome
+docker pull --platform linux/amd64 selenium/node-firefox
+docker pull --platform linux/amd64 selenium/node-chrome-debug
+docker pull --platform linux/amd64 selenium/node-firefox-debug
+```
+Windows/Linux
+```
+docker pull selenium/node-chrome
+docker pull selenium/node-firefox
+docker pull selenium/node-chrome-debug
+docker pull selenium/node-firefox-debug
+```
 
-The pytest command has several command line options.
-Course material will cover many of them.
-Check out the [Usage and Invocations](https://docs.pytest.org/en/stable/usage.html) page
-for complete documentation.
+By verifying the images again ´docker images´, you should see:
+```docker
+IMAGE                                ID             DISK USAGE   CONTENT SIZE   EXTRA
+selenium/hub:latest                  f269ed6bcd3f        966MB          327MB        
+selenium/node-chrome-debug:latest    4205fd019f4c       1.63GB          436MB        
+selenium/node-chrome:latest          239eacca7175       3.02GB          931MB        
+selenium/node-firefox-debug:latest   15f9830958b3       1.46GB          384MB        
+selenium/node-firefox:latest         549284752c8c       2.93GB          903MB        
+```
 
-*Warning:*
-If you attempt to run tests from this example project,
-make sure to checkout the correct branch first!
+### Running the Selenium Grid
+Start Selenium Grid using Docker Compose:
+```
+docker-compose up -d
+```
+Scale browsers if necessary:
+```
+docker-compose up -d --scale chrome=2 --scale firefox=4
+```
+
+### Installing Python Packages
+Install project dependencies with Pipenv:
+```
+pipenv install selenium pytest pytest-xdist webdriver-manager pytest-bdd pyyaml
+```
+Verify the initial test:
+```
+pipenv run pytest
+```
+Install Allure integration:
+```
+pipenv install allure-pytest
+```
+
+### Running the Full Test Suite
+After verifying that ´test_fw.py´ passes:
+1. Generate and open an Allure session:
+```
+allure generate --clean allure-results && allure open
+```
+2. Run Python tests targeting the @web tag:
+```
+pipenv run python -m pytest -k "web"
+```
+3. View the Allure report:
+```
+allure serve allure-results
+```
