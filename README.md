@@ -149,15 +149,25 @@ You should see the installed Docker version printed.
 
 ### Running Selenium Grid with Docker
 
-This project does not include a Dockerfile or containerised test runner.
+This project __does not__ include a Dockerfile or containerised test runner.
 Instead, it depends on Selenium Grid containers you run locally.
 
-Start the Selenium Grid using the official images (version 4.21.0):
+Start the Selenium Grid using the official images (version 4.21.0)
+
+__Windows/Linux__:
 ```bash
 docker network create grid
 docker run -d --net grid --name selenium-hub -p 4444:4444 selenium/hub:4.21.0
 docker run -d --net grid --name chrome-node -e SE_EVENT_BUS_HOST=selenium-hub \ selenium/node-chrome:4.21.0
 docker run -d --net grid --name firefox-node -e SE_EVENT_BUS_HOST=selenium-hub \ selenium/node-firefox:4.21.0
+```
+
+__macOS (Apple Silicon + Intel)__:
+```bash
+docker network create grid
+docker run -d --net grid --platform linux/amd64 \ --name selenium-hub -p 4444:4444 selenium/hub:4.21.0
+docker run -d --net grid --platform linux/amd64 \ --name chrome-node -e SE_EVENT_BUS_HOST=selenium-hub selenium/node-chrome:4.21.0
+docker run -d --net grid --platform linux/amd64 \ --name firefox-node -e SE_EVENT_BUS_HOST=selenium-hub selenium/node-firefox:4.21.0
 ```
 
 Once the containers are running, verify the Grid is ready:
