@@ -65,10 +65,9 @@ web-automation/
 
 
 ## Python Setup
-<details> <summary><strong>Click to expand</strong></summary>
 Python setup can be complicated.
 This section documents how to set up your machine for Python test automation development.
-
+<details> <summary><strong>Read more..</strong></summary>
 ### Python Installation and Tools
 
 This application requires Python 3.12.
@@ -126,9 +125,8 @@ Virtual environments let projects avoid unnecessary dependencies and version mis
 
 
 ## Docker Setup
-<details> <summary><strong>Click to expand</strong></summary>
 This project uses Docker to ensure consistent and reproducible test environments.
-
+<details> <summary><strong>Read more..</strong></summary>
 ### Install Docker
 
 Download and install Docker Desktop for your operating system. After installation, verify it works by running:
@@ -149,9 +147,8 @@ These commands ensure your tests run in a clean, isolated environment every time
 
 
 ## Allure Setup
-<details> <summary><strong>Click to expand</strong></summary>
 Allure Reporting provides rich, visual test reports generated from your framework.
-
+<details> <summary><strong>Read more..</strong></summary>
 ### Install Allure
 
 You must install Allure locally to view reports.
