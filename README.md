@@ -5,7 +5,7 @@ This automation project for web application repository contains example code for
 
 ## Quick Start
 For users who just want to run the project quickly:
-```
+```bash
 # 1. Clone repo
 git clone <repo-url>
 cd web-automation
