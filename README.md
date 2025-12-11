@@ -35,7 +35,7 @@ Run test via BDD (Gherkin):
 # 5. Start Selenium Grid
 docker-compose up -d --scale chrome=2 --scale firefox=4
 
-# 5. Run tests 
+# 6. Run tests 
 pipenv run python -m pytest -k "web"
 
 # Optional: generate Allure report
