@@ -12,8 +12,13 @@ Feature: Wikipedia Web Browsing
     And the Wikipedia search result page title contains "<phrase>"
     And the Wikipedia search result page URL ends with "/wiki/<phrase>"
 
-    Examples: Query
+    @positive
+    Examples: Positive Query
     | phrase     |
     | python     |
     | polar bear |
+
+    @negative
+    Examples: Negative Query (intentional fail for Allure demo)
+    | phrase     |
     | panda      |

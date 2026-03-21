@@ -1,17 +1,13 @@
 services:
 
   selenium-hub:
-    image: selenium/hub
+    image: selenium/hub:4.21.0
     platform: linux/amd64
     ports:
       - "4444:4444"
-    environment:
-      GRID_MAX_SESSION: 16
-      GRID_BROWSER_TIMEOUT: 300
-      GRID_TIMEOUT: 300
 
   chrome:
-    image: selenium/node-chrome:latest
+    image: selenium/node-chrome:4.21.0
     platform: linux/amd64
     depends_on:
       - selenium-hub
@@ -24,7 +20,7 @@ services:
     #   - /dev/shm:/dev/shm
 
   firefox:
-    image: selenium/node-firefox:latest
+    image: selenium/node-firefox:4.21.0
     platform: linux/amd64
     depends_on:
       - selenium-hub

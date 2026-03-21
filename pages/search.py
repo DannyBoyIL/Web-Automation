@@ -5,6 +5,8 @@ The page object for the Wikipedia search page.
 
 from utils.logger import log
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver import Keys
 
 class WikipediaSearchPage:
@@ -27,7 +29,9 @@ class WikipediaSearchPage:
     def search(self, query):
         log.info(f"Attempting to search for: {query}")
         try:
-            search_input = self.browser.find_element(*self.SEARCH_INPUT)
+            search_input = WebDriverWait(self.browser, 15).until(
+                EC.visibility_of_element_located(self.SEARCH_INPUT)
+            )
             search_input.send_keys(query + Keys.RETURN)
             log.debug("Query successfully entered into search field.")
         except Exception as e:

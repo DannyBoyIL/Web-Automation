@@ -38,6 +38,12 @@ docker-compose up -d --scale chrome=2 --scale firefox=4
 # 6. Run tests 
 pipenv run python -m pytest -k "web"
 
+# Optional: run in parallel with a fixed browser mix (recommended once Grid is up)
+pipenv run pytest -n 3 --dist=load -k "web" --browsers firefox,chrome
+
+# Optional: run in parallel using the default browser only
+pipenv run pytest -n 3 --dist=load -k "web"
+
 # Optional: generate Allure report
 allure serve allure-results
 
@@ -258,6 +264,10 @@ Scale browsers if necessary:
 ```bash
 docker-compose up -d --scale chrome=2 --scale firefox=4
 ```
+Notes:
+* This project is validated with Selenium images `4.21.0` and `platform: linux/amd64` in `docker-compose.yml`.
+* Avoid mixing tags (for example `latest` for nodes and pinned for hub) because it can cause node registration and session timeouts.
+* On Apple Silicon, the `linux/amd64` images run under emulation. This is expected for the stable setup below.
 <hr>
 
 ### Installing Python Packages
@@ -363,6 +373,20 @@ pipenv run pytest -n 1
 <hr>
 
 ### Docker / Selenium Grid Issues
+__Recommended, known-good Docker versions (stable baseline)__
+
+If tests are flaky after changing Docker images or tags, return to the known-good versions:
+* `selenium/hub:4.21.0`
+* `selenium/node-chrome:4.21.0`
+* `selenium/node-firefox:4.21.0`
+
+In `docker-compose.yml`, keep `platform: linux/amd64` for all services.
+Then restart the Grid:
+```bash
+docker-compose down
+docker-compose up -d --scale chrome=2 --scale firefox=4
+```
+
 __Selenium Hub not reachable__
 
 __Symptom__: `selenium.common.exceptions.WebDriverException: hub unreachable`
@@ -385,17 +409,22 @@ http://localhost:4444
 
 __Nodes not registering to Hub__
 
-__Fix__: Nodes must match Hub’s platform.
+__Symptom__: `/status` shows only one browser type or zero available slots, and tests fail with `SessionNotCreatedException` or timeouts.
 
-Apple Silicon (M1/M2/M3) requires:
-```bash
-docker pull --platform linux/amd64 selenium/node-chrome
-```
+__Cause__: Version mismatch between hub and nodes, or platform mismatch on Apple Silicon.
 
-Then restart Grid:
+__Fix__:
+* Use the same Selenium version for hub and all nodes (recommended: `4.21.0`).
+* Ensure `platform: linux/amd64` is set on all services in `docker-compose.yml` (macOS Apple Silicon).
+* Restart the Grid after changes:
 ```bash
 docker-compose down
-docker-compose up -d
+docker-compose up -d --scale chrome=2 --scale firefox=4
+```
+
+Optional: validate the Grid before running tests:
+```bash
+curl -s http://localhost:4444/status | python3 -m json.tool | grep -E '"browserName"|session'
 ```
 
 __Browser crashes instantly__

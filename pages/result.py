@@ -4,6 +4,8 @@ The page object for the Wikipedia search result page.
 """
 
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from utils.logger import log
 
 class WikipediaResultPage:
@@ -21,7 +23,9 @@ class WikipediaResultPage:
 
     def header_value(self):
         log.info("Attempting to get the page header value.")
-        page_header = self.browser.find_element(*self.PAGE_HEADER)
+        page_header = WebDriverWait(self.browser, 15).until(
+            EC.visibility_of_element_located(self.PAGE_HEADER)
+        )
         log.debug(f"Found element with locator: {self.PAGE_HEADER}")
         value = page_header.find_element(By.TAG_NAME, 'span').get_attribute("textContent")
         log.info(f"Retrieved page header value: '{value}'")
@@ -29,7 +33,9 @@ class WikipediaResultPage:
 
     def body_content(self):
         log.info("Attempting to find the main body content element.")
-        element = self.browser.find_element(*self.BODY_CONTENT)
+        element = WebDriverWait(self.browser, 15).until(
+            EC.visibility_of_element_located(self.BODY_CONTENT)
+        )
         log.debug(f"Body content element located.")
         return element
 
