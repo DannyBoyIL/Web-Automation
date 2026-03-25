@@ -1,7 +1,31 @@
 # Web Automation Framework (Python · Selenium · Pytest-BDD)
-This automation project for web application repository contains example code for the
-*Behavior-Driven Python with pytest-bdd &amp; Selenium*.
+A portfolio-style web automation framework demonstrating BDD patterns, Page Object Model architecture, and parallel cross-browser execution against a real public web application.
 
+## Feature Under Test
+This suite targets the **Wikipedia** search flow:
+* Search for a term → results page loads and is navigable
+* Validate search results page elements are displayed correctly
+* Cross-browser coverage on Chrome and Firefox via Selenium Grid
+
+## Highlights
+* **Page Object Model (POM)** for clean, maintainable test architecture
+* **Behaviour-Driven Development (BDD)** using readable, business-oriented Gherkin scenarios
+* **Dockerized Selenium Grid** for consistent and reproducible cross-browser execution
+* **Parallel execution** via pytest-xdist for faster suite runs
+* **CI/CD integration** for automated test execution in pipelines
+* **Allure reporting** for rich, visual test reports
+* **Structured logging** for traceability and debugging
+* **Failure-proofing techniques** to increase test stability and reduce flakiness
+
+## Tech Stack
+* Python 3.12
+* Selenium 4
+* pytest-BDD
+* pytest-xdist
+* Pipenv
+* Docker + Selenium Grid (4.21.0)
+* Allure
+* webdriver-manager
 
 ## Quick Start
 For users who want to run the project quickly:
@@ -35,7 +59,7 @@ Run test via BDD (Gherkin):
 # 5. Start Selenium Grid
 docker-compose up -d --scale chrome=2 --scale firefox=4
 
-# 6. Run tests 
+# 6. Run tests
 pipenv run python -m pytest -k "web"
 
 # Optional: run in parallel with a fixed browser mix (recommended once Grid is up)
@@ -47,26 +71,12 @@ pipenv run pytest -n 3 --dist=load -k "web"
 # Optional: generate Allure report
 allure serve allure-results
 
-# Optional: verify the Grid 
+# Optional: verify the Grid
 http://localhost:4444/grid/console
 ```
 
-
-## Repository Purpose
-This project serves as a comprehensive example of a modern web automation framework built around simple Wikipedia search‑result page capabilities. It demonstrates a full end-to-end implementation of best practices used in professional QA automation, including:
-
-* __Page Object Model (POM)__ for clean, maintainable test architecture.
-* __Behaviour-Driven Development (BDD)__ using readable, business-oriented scenarios.
-* __CI/CD integration__ for automated test execution in pipelines.
-* __Dockerized test environments__ for consistent and reproducible runs.
-* __Allure Reporting__ for rich, visual test reports.
-* __Extensive logging__ to support debugging and traceability.
-* __Failure-proofing techniques__ to increase test stability and reduce flakiness.
-
-The repository provides reference implementations for all these components. Use this project as guidance when building or improving your own automation framework. Instead of copying code directly, explore the structure, patterns, and design decisions to understand how each part contributes to a scalable and robust automation setup.
-
-### Project Structure
-```graghql
+## Project Structure
+```text
 web-automation/
 │
 ├── features/               # BDD .feature files
@@ -110,7 +120,7 @@ especially if Python was previously installed on your machine.
 To verify your Python installation, enter `python --version` at the command line.
 You should see the proper version printed.
 
-If the `python` command doesn't work or doesn’t print the expected version number,
+If the `python` command doesn't work or doesn't print the expected version number,
 then try using the `python3` command instead.
 If that still doesn't work,
 then the correct Python installation might not be included in your system path.
@@ -249,9 +259,9 @@ docker pull selenium/node-firefox:4.21.0
 By verifying the images again `docker images`, you should see:
 ```bash
 IMAGE                                ID             DISK USAGE   CONTENT SIZE   EXTRA
-selenium/hub:4.21.0                  f269ed6bcd3f        966MB          327MB          
-selenium/node-chrome:4.21.0          239eacca7175       3.02GB          931MB             
-selenium/node-firefox:4.21.0         549284752c8c       2.93GB          903MB        
+selenium/hub:4.21.0                  f269ed6bcd3f        966MB          327MB
+selenium/node-chrome:4.21.0          239eacca7175       3.02GB          931MB
+selenium/node-firefox:4.21.0         549284752c8c       2.93GB          903MB
 ```
 <hr>
 
@@ -297,13 +307,13 @@ allure serve allure-results
 ```
 
 
-## 🛠️ Troubleshooting
+## Troubleshooting
 A collection of common issues and quick fixes for running the web-automation project.
 
 ### Pipenv Issues
 __Pipenv environment not activating__
 
-__Symptom__: `pipenv run pytest` fails or packages aren’t found.
+__Symptom__: `pipenv run pytest` fails or packages aren't found.
 
 __Fix__:
 ```bash
@@ -476,7 +486,7 @@ pipenv install webdriver-manager
 
 Use `GeckoDriverManager()` instead of local binary.
 
-__Browser cannot start: “DevToolsActivePort file doesn’t exist”__
+__Browser cannot start: "DevToolsActivePort file doesn't exist"__
 
 This happens in Docker or CI environments.
 
@@ -496,6 +506,6 @@ chmod +x <script_name>
 
 __Windows: tests hang or fail silently__
 
-Run terminal as Administrator<br> 
-__OR__<br> 
+Run terminal as Administrator<br>
+__OR__<br>
 Disable long path restrictions.
