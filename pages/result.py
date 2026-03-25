@@ -3,20 +3,22 @@ This module contains WikipediaResultPage,
 The page object for the Wikipedia search result page.
 """
 
+from urllib.parse import urlparse
+
+from pages.base import BasePage
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from utils.logger import log
 
-class WikipediaResultPage:
+class WikipediaResultPage(BasePage):
 
     # Locators
     PAGE_HEADER = (By.ID, 'firstHeading')
     BODY_CONTENT = (By.ID, 'bodyContent')
 
-    # Initializer
     def __init__(self, browser):
-        self.browser = browser
+        super().__init__(browser)
         log.info("Initialized WikipediaResultPage object.")
 
     # Interaction Methods
@@ -45,8 +47,7 @@ class WikipediaResultPage:
         return title
 
     def url(self):
-        url = self.browser.current_url
-        parts = url.rstrip("/").split("/")
-        suffix =  "/" + "/".join(parts[-2:])
-        log.info(f"Retrieved current URL and processed to: '{suffix}'")
-        return suffix
+        raw = self.browser.current_url
+        path = urlparse(raw).path.rstrip("/")
+        log.info(f"Retrieved current URL path: '{path}'")
+        return path

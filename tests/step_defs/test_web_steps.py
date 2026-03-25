@@ -1,14 +1,5 @@
 """
 This module contains step definitions for web.feature.
-It uses Selenium WebDriver for browser interactions:
-https://www.seleniumhq.org/projects/webdriver/
-Setup and cleanup are handled using hooks.
-For a real test automation project,
-use Page Object Model or Screenplay Pattern to model web interactions.
-
-Prerequisites:
- - Firefox must be installed.
- - geckodriver must be installed and accessible on the system path.
 """
 
 import allure
@@ -49,7 +40,6 @@ def header_value(browser, phrase):
     allure.attach(header, "Header text", allure.attachment_type.TEXT)
 
     assert phrase == header, f"Expected: '{phrase}', Actual: '{header}'"
-    #assert phrase == result_page.header_value().lower()
 
 @then(parsers.parse('the Wikipedia body content is present'))
 @allure.step("Check that #bodyContent exists and is visible")
@@ -61,7 +51,6 @@ def content(browser):
     allure.attach(str(is_visible), "Body content visible?", allure.attachment_type.TEXT)
 
     assert is_visible, "Body content is not visible"
-    #assert result_page.body_content().is_displayed()
 
 @then(parsers.parse('the Wikipedia search result page title contains "{phrase}"'))
 @allure.step("Validate page title contains '{phrase}'")
@@ -72,7 +61,6 @@ def title(browser, phrase):
     allure.attach(page_title, "Page title", allure.attachment_type.TEXT)
 
     assert phrase in page_title, f"'{phrase}' not found in '{page_title}'"
-    #assert result_page.title().lower().find(phrase) != -1
 
 @then(parsers.parse('the Wikipedia search result page URL ends with "/wiki/{phrase}"'))
 @allure.step("Validate URL ends with '/wiki/{phrase}'")
@@ -85,4 +73,3 @@ def url(browser, phrase):
     allure.attach(expected, "Expected ending", allure.attachment_type.TEXT)
 
     assert actual.endswith(expected), f"Expected URL to end with '{expected}' but got '{actual}'"
-    #assert result_page.url().lower().endswith(f"wiki/{phrase.replace(" ", "_")}")

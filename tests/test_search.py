@@ -45,5 +45,3 @@ def test_basic_wikipedia_search(json_browser, phrase):
         allure.attach(actual, "Current URL", allure.attachment_type.TEXT)
         allure.attach(expected, "Expected ending", allure.attachment_type.TEXT)
         assert actual.endswith(expected), f"Expected URL to end with '{expected}' but got '{actual}'"
-
-    # raise Exception("Incomplete test")

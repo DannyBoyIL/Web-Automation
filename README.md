@@ -12,7 +12,6 @@ This suite targets the **Wikipedia** search flow:
 * **Behaviour-Driven Development (BDD)** using readable, business-oriented Gherkin scenarios
 * **Dockerized Selenium Grid** for consistent and reproducible cross-browser execution
 * **Parallel execution** via pytest-xdist for faster suite runs
-* **CI/CD integration** for automated test execution in pipelines
 * **Allure reporting** for rich, visual test reports
 * **Structured logging** for traceability and debugging
 * **Failure-proofing techniques** to increase test stability and reduce flakiness
@@ -79,13 +78,14 @@ http://localhost:4444/grid/console
 ```text
 web-automation/
 │
-├── features/               # BDD .feature files
 ├── pages/                  # Page Object Model implementation
-├── tests/                  # Test step definitions & glue code
-├── utils/                  # Helpers (logging, configs, waiters, etc.)
+├── tests/
+│   ├── features/           # BDD .feature files
+│   └── step_defs/          # pytest-bdd step definitions
+├── utils/                  # Helpers (logging, etc.)
 │
+├── config.json
 ├── docker-compose.yml
-├── Dockerfile              * Here will go the Dockerfile for more complex systems
 ├── Pipfile / Pipfile.lock
 ├── README.md
 └── pytest.ini

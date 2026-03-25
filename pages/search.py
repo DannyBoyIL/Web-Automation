@@ -3,23 +3,20 @@ This module contains WikipediaSearchPage,
 The page object for the Wikipedia search page.
 """
 
+from pages.base import BasePage
 from utils.logger import log
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver import Keys
 
-class WikipediaSearchPage:
+class WikipediaSearchPage(BasePage):
 
     # URL
     URL = 'https://www.wikipedia.com/'
 
     # Locators
     SEARCH_INPUT = (By.ID, 'searchInput')
-
-    # Initializer
-    def __init__(self, browser):
-        self.browser = browser
 
     # Interaction Methods
     def load(self):

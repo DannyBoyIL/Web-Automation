@@ -9,6 +9,10 @@ import allure
 import os
 import tempfile
 import selenium.webdriver as webdriver
+from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.firefox.service import Service as FirefoxService
+from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.firefox import GeckoDriverManager
 from selenium.common.exceptions import WebDriverException
 from utils.logger import log
 import time
@@ -193,8 +197,10 @@ def config(pytestconfig):
     implicit_wait = pytestconfig.getoption("--implicit-wait")
 
     # Validate
-    assert browser in ["chrome", "firefox", "headless"], f"Invalid browser: {browser}"
-    assert implicit_wait > 0
+    if browser not in ["chrome", "firefox", "headless"]:
+        pytest.fail(f"Invalid --browser value: '{browser}'. Must be chrome, firefox, or headless.")
+    if implicit_wait <= 0:
+        pytest.fail("--implicit-wait must be greater than 0.")
 
     return {
         "grid_url": grid_url,
@@ -210,10 +216,12 @@ def json_config():
     with open("config.json") as f:
         config = json.load(f)
 
-    # Assert values are acceptable
-    assert config['browser'] in ['chrome', 'firefox', 'safari', 'opera', 'edge', 'Headless Chrome']
-    assert isinstance(config['implicit_wait'], int)
-    assert config['implicit_wait'] > 0
+    # Validate values
+    valid_browsers = ['chrome', 'firefox', 'safari', 'opera', 'edge', 'Headless Chrome']
+    if config['browser'] not in valid_browsers:
+        pytest.fail(f"Invalid browser in config.json: '{config['browser']}'. Must be one of: {valid_browsers}")
+    if not isinstance(config['implicit_wait'], int) or config['implicit_wait'] <= 0:
+        pytest.fail("implicit_wait in config.json must be a positive integer.")
 
     # Return config for use
     return config
@@ -310,21 +318,20 @@ def json_browser(json_config, pytestconfig):
         options = webdriver.ChromeOptions()
         profile_dir = tempfile.mkdtemp(prefix=f"chrome-profile-{worker_id}-")
         options.add_argument(f"--user-data-dir={profile_dir}")
-        browser = webdriver.Chrome(options=options)
+        browser = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
     elif json_config['browser'] == 'firefox':
-        browser = webdriver.Firefox()
+        browser = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()))
     elif json_config['browser'] == 'safari':
         opts = webdriver.SafariOptions()
         opts.set_capability("safari:useNonPersistentSession", True)
         browser = webdriver.Safari(options=opts)
     elif json_config['browser'] == 'Headless Chrome':
         opts = webdriver.ChromeOptions()
-        opts.add_argument('headless')
+        opts.add_argument('--headless=new')
+        opts.add_argument('--disable-gpu')
         profile_dir = tempfile.mkdtemp(prefix=f"chrome-profile-{worker_id}-")
         opts.add_argument(f"--user-data-dir={profile_dir}")
-        # opts.add_argument('--headless')
-        # opts.headless = True
-        browser = webdriver.Chrome(options=opts)
+        browser = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=opts)
     else:
         raise Exception(f"Unsupported browser: {json_config['browser']}")
 
